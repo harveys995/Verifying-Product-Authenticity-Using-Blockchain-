@@ -1,0 +1,169 @@
+.tile {
+  text-align: center;
+  margin: auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.flexboxcontainer {
+  position: relative;
+  justify-content: space-between;
+  justify-items: center;
+  display: flex;
+  top: 1cm;
+  left: -16cm;
+  right: auto;
+  bottom: 40cm;
+  gap: 0rem;
+  padding: 0 3rem;
+  flex-flow: row nowrap;
+  flex-direction: row;
+  height: 50cm;
+  width: 50cm;
+}
+
+.item {
+  margin: 1rem 0;
+}
+
+.image {
+  width: 100%;
+  height: 20rem;
+  overflow: hidden;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.content {
+  text-align: center;
+  padding: 1rem;
+}
+
+.content h3 {
+  font-size: 1.25rem;
+  color: #2c292b;
+}
+
+.actions {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  color: #77002e;
+  border: 1px solid #77002e;
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+}
+
+.actions button:hover,
+.actions button:active {
+  background-color: #ffe2ed;
+}
+
+.flexboxcontainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.inImageText {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  top: 0;
+  left: 0;
+  right: 200;
+  bottom: 200;
+  justify-content: center;
+  align-items: center;
+}
+
+.food1 img {
+  width: 10%;
+  height: 130px;
+}
+
+.photo {
+  height: 500px;
+  width: 500px;
+}
+
+.sdFoodScreenMain {
+  float: left;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sdFoodBoxesMarketplace {
+  display: flex;
+  flex-direction: column;
+
+  flex-basis: 50%;
+}
+
+.sdFoodBoxesMyItems {
+  display: flex;
+  flex-direction: column;
+
+  flex-basis: 25%;
+}
+
+.sdFoodBoxesBrand {
+  display: flex;
+  flex-direction: column;
+
+  flex-basis: 25%;
+}
+
+.contentcontainer {
+  padding: 10%;
+
+  font-size: 24px;
+}
+
+.row {
+  display: flex;
+  height: 100%;
+}
+
+.leftpanel {
+  display: inline-block;
+
+  width: 60%;
+}
+.middlepanel {
+  display: inline-block;
+
+  width: 40%;
+}
+
+.floatcontainer {
+  border: 0px solid #fff;
+  padding: 10px;
+}
+
+.floatchild1 {
+  width: 100%;
+  font-size: 1.4rem;
+  padding: 1px;
+}
+
+.columnsisvcentered {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.main {
+  margin: 3rem auto;
+  width: 90%;
+  max-width: 40rem;
+}

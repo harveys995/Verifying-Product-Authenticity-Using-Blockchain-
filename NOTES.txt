@@ -1,0 +1,125 @@
+*OPEN ZEPPILIN*
+
+To mint NFT's we must abide by the ERC-721 standard. This outlines all the functions required for an NFT to undergo basic operations like:
+
+- Transfer from address to address 
+- Check balance of NFT's assigned to owner
+- Find owner of NFT
+etc...
+
+Therefore we can copy the code stated by this ERC-721 standard. To do this I wil be using a library by OpenZeppellin:
+https://github.com/OpenZeppelin/openzeppelin-contracts - This has been installed already and can be viewed in "node_modules" as "@openzeppelin". So we can now import the library into our Smart Contracts using:
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+
+*DEPLOYING NFT SMART CONTRACTS*
+
+May need to do this in another project because if we do it with this then the migration files will deploy one after another. We'd want to do this separately, so perheps 3 other Truffle projects:
+
+- PradaNFT
+- NikeNFT
+- ArtNFT
+
+For now lets make the brains of it all in here.
+
+
+ERC-1155 allows for NFT's to be added to the collection after deployment. This could be interesting if products know they'll add more items at a later date
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/presets/ERC721PresetMinterPauserAutoId.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+contract PradaNFT is ERC721, AccessControl {
+
+    int public maxSupply = 16;
+    address public pradaOwner;
+    uint public tokenCount;
+
+    constructor () ERC721PresetMinterPauserAutoId ("Prada Spring Summer 2022 Collection", "PRADA-22", "https://gateway.pinata.cloud/ipfs/QmUJ3Y8yFED7c9SXXRgy9YS9GCX5hAHvzJtKdA41oaTNhR/") {
+        pradaOwner = msg.sender;
+    }
+    // Create a new role identifier for the minter role
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+
+   constructor(address minter) public ERC721("MyToken", "TKN") {
+        // Grant the minter role to a specified account
+        _setupRole(MINTER_ROLE, minter);
+    }
+
+    function getPradaOwner() public view returns (address) {
+        return pradaOwner;
+    }
+
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+       return string(abi.encodePacked(super.tokenURI(tokenId),".json"));
+
+    }
+      
+    function mintAll() public {
+
+        for (int i = 0; i <= maxSupply;i++) {
+            mint(msg.sender);
+            tokenCount++;
+        }
+
+    }
+
+        function mintNFT(uint256 tokenId) public virtual{
+        require(hasRole(MINTER_ROLE, _msgSender()), "ERC721PresetMinterPauserAutoId: must have minter role to mint");
+        tokenCount++;
+        _mint(msg.sender, tokenId);
+    }
+
+}
+
+
+
+
+
+working::::::
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/presets/ERC721PresetMinterPauserAutoId.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
+
+contract PradaNFT is ERC721PresetMinterPauserAutoId {
+
+    int public maxSupply = 16;
+    address public pradaOwner;
+    uint public tokenCount;
+
+    constructor () ERC721PresetMinterPauserAutoId ("Prada Spring Summer 2022 Collection", "PRADA-22", "https://gateway.pinata.cloud/ipfs/QmUJ3Y8yFED7c9SXXRgy9YS9GCX5hAHvzJtKdA41oaTNhR/") {
+        pradaOwner = msg.sender;
+    }
+
+    function getPradaOwner() public view returns (address) {
+        return pradaOwner;
+    }
+
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+       return string(abi.encodePacked(super.tokenURI(tokenId),".json"));
+
+    }
+      
+    function mintAll() public {
+
+        for (int i = 0; i <= maxSupply;i++) {
+            mint(msg.sender);
+            tokenCount++;
+        }
+
+    }
+
+        function mintNFT(uint256 tokenId) public virtual{
+        require(hasRole(MINTER_ROLE, _msgSender()), "ERC721PresetMinterPauserAutoId: must have minter role to mint");
+        tokenCount++;
+        _mint(msg.sender, tokenId);
+    }
+
+}
